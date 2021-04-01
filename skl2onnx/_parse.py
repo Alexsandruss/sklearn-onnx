@@ -17,6 +17,7 @@ from sklearn.gaussian_process import GaussianProcessRegressor
 from sklearn.linear_model import BayesianRidge
 from sklearn.model_selection import GridSearchCV
 from sklearn.neighbors import NearestNeighbors
+from daal4py.sklearn.neighbors import NearestNeighbors as D4P_NearestNeighbors
 from sklearn.mixture import GaussianMixture, BayesianGaussianMixture
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.pipeline import Pipeline
@@ -138,7 +139,7 @@ def _parse_sklearn_simple_model(scope, model, inputs, custom_parsers=None):
         this_operator.outputs.append(label_variable)
         this_operator.outputs.append(score_tensor_variable)
 
-    elif type(model) == NearestNeighbors:
+    elif type(model) == NearestNeighbors or type(model) == D4P_NearestNeighbors:
         # For Nearest Neighbours, we have two outputs, one for nearest
         # neighbours' indices and the other one for distances
         index_variable = scope.declare_local_variable(

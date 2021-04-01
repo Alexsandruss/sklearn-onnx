@@ -199,6 +199,21 @@ except ImportError:
 
 from sklearn.random_projection import GaussianRandomProjection
 
+# daal4py
+from daal4py.sklearn.cluster import KMeans as D4P_KMeans
+from daal4py.sklearn.linear_model import ElasticNet as D4P_ElasticNet
+from daal4py.sklearn.linear_model import Ridge as D4P_Ridge
+from daal4py.sklearn.linear_model import LogisticRegression as D4P_LogisticRegression
+from daal4py.sklearn.linear_model import Lasso as D4P_Lasso
+from daal4py.sklearn.linear_model import LinearRegression as D4P_LinearRegression
+from daal4py.sklearn.neighbors import KNeighborsClassifier as D4P_KNeighborsClassifier
+from daal4py.sklearn.neighbors import KNeighborsRegressor as D4P_KNeighborsRegressor
+from daal4py.sklearn.neighbors import NearestNeighbors as D4P_NearestNeighbors
+from daal4py.sklearn.ensemble import RandomForestClassifier as D4P_RandomForestClassifier
+from daal4py.sklearn.ensemble import RandomForestRegressor as D4P_RandomForestRegressor
+from daal4py.sklearn.decomposition import PCA as D4P_PCA
+from daal4py.sklearn.svm import SVC as D4P_SVC
+
 # Custom extension
 from .sklapi import CastRegressor, CastTransformer
 
@@ -383,6 +398,23 @@ def build_sklearn_operator_name_map():
         StandardScaler: 'SklearnScaler',
         TheilSenRegressor: 'SklearnLinearRegressor',
     })
+
+    res.update({
+        D4P_KMeans: 'SklearnKMeans',
+        D4P_ElasticNet: 'SklearnLinearRegressor',
+        D4P_Ridge: 'SklearnLinearRegressor',
+        D4P_LogisticRegression: 'SklearnLinearClassifier',
+        D4P_Lasso: 'SklearnLinearRegressor',
+        D4P_LinearRegression: 'SklearnLinearRegressor',
+        D4P_KNeighborsClassifier: 'SklearnKNeighborsClassifier',
+        D4P_KNeighborsRegressor: 'SklearnKNeighborsRegressor',
+        D4P_NearestNeighbors: 'SklearnNearestNeighbors',
+        D4P_RandomForestClassifier: 'SklearnRandomForestClassifier',
+        D4P_RandomForestRegressor: 'SklearnRandomForestRegressor',
+        D4P_PCA: 'SklearnPCA',
+        D4P_SVC: 'SklearnSVC'
+    })
+
     if None in res:
         del res[None]
     return res
